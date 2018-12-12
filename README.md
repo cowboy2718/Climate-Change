@@ -13,7 +13,7 @@ The GISS Surface Temperature Analysis (GISTEMP) is an estimate of global surface
 
 ### Package Details
 
-This package provides routines for the visualization of global surface temperature change.  Three type of graphs are presented: a **simple line chart**; a **bar plot**; a **streamgraph** interpretation.  All graphical displays are based off of the same GISTEMP data set.
+This package provides routines for the visualization of global surface temperature change.  Three type of graphs are presented: a **simple line chart**; a **bar plot**; a **streamgraph**.  All graphical displays are based off of the same GISTEMP data set.
 
 This package provides routines to perform the analysis using the differing graph types.  Examples are shown below.
 
