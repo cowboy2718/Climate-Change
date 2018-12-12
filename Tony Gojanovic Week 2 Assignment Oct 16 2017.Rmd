@@ -1,0 +1,110 @@
+---
+title: 
+output: statsr:::statswithr_lab
+---
+
+## Fluctuations in Global Temperature Anomalies
+
+#### Coursera Data Visualization Course Fall 2017
+#### Programming Assignment 1: Visualize Data using a Chart
+#### University of Illinois at Urbana Champaign
+#### John C. Hart, Computer science Department
+
+***
+##### Prepared by:
+##### Tony Gojanovic
+##### October 17, 2017
+
+***
+
+### Background
+
+The GISS Surface Temperature Analysis (GISTEMP) is an estimate of global surface temperature change. From the NASA GISTEMP website, the history of the data are "Global temperature records start around 1880 because observations did not sufficiently cover enough of the planet prior to that time. The period of 1951-1980 was chosen largely because the U.S. National Weather Service uses a three-decade period to define "normal" or average temperature. The GISS temperature analysis effort began around 1980, so the most recent 30 years was 1951-1980. It is also a period when many of today's adults grew up, so it is a common reference that many people can remember." (Reference https://earthobservatory.nasa.gov/Features/WorldOfChange/decadaltemp.php).
+
+This data set was analyzed using R and the report written in R Markdown and compiled using Knitr.
+
+### Conclusions
+
+It appears that overall global temperatures are on the increase with much higher variability seen in extremes over the past few decades.  The origin or cause of this increase would be warranted although the most likely conjecture is that the increasing temperatures and variability are associated with global warming mechanisms.  
+
+***
+
+### Exploratory Data Analysis
+
+The following are R libraries we will use in the analysis.  The main library for graphical analysis to be used is *ggplot2* which was developed by Hadley Wickham for R based on the work entitled *The Grammar of Graphics* by Leland Wilkinson.
+
+```{r warning=FALSE, message=FALSE}
+#The following libraries are useful in plotting maps and data manipulation:
+
+library(ggplot2)
+library(dplyr)
+library(knitr)
+library(statsr)
+library(streamgraph)
+library(tidyr)
+
+```
+
+Importing the data and assigning it to the variable *gisstemp* is shown in the following R code chunk.
+
+```{r}
+library(readr)
+setwd("/Users/tonygojanovic/Data2")
+gisstemp <- read_csv("Tony/2017/Data Visualization University of Illinois/Week 1/ExcelFormattedGISTEMPData2CSV.csv")
+```
+
+#### **Simple Line Chart with Loess Smoother | Global Temperature Anomalies**
+
+The following *scatter plot* is a *time series* plot of average (north and southern hemispheres) absolute temperature anomalies  Notice we are treating the years as continuous variables.  Also added is a *loess* smoother along with a color gradient to show increase in temperature.  Here we use blue as a "cool"" color and dark orange as a "hot" color.
+
+```{r fig.height=8, fig.width=10}
+ggplot(gisstemp,aes(Year,Glob))+geom_point(aes(color=Glob))+geom_smooth(method="loess")+ggtitle("Global Absolute Temperature Anomalies - Average Temp. Anomaly over Northern and Southern Hemispheres")+xlab("Measurement Year")+ ylab("Average Temperature Anomaly degrees F")+scale_y_continuous(breaks = seq(-50, 100, by = 5))+scale_x_continuous(breaks = seq(1880, 2014, by = 10))+scale_color_gradient(low="blue", high="darkorange", name = "avg deg F")
+```
+
+#### **Simple Bar Chart | Global Temperature Anomalies**
+
+The following is a bar chart interpretation of the global temperature anomaly data.  It offers a different perspective than the scatter plot and accentuates the changes more dramatically.  The color gradient was based on desaturating hues a bit and keeping luminance or value at a lower value to not make the colors appear too comical.
+
+```{r fig.height=8, fig.width=10}
+ggplot(gisstemp,aes(Year,Glob))+geom_bar(stat="identity",aes(fill=Glob))+ggtitle("Global Absolute Temperature Anomalies - Average Temp.Anomaly over Northern and Southern Hemispheres")+xlab("Measurement Year")+ ylab("Average Temperature Anomaly degrees F")+scale_y_continuous(breaks = seq(-50, 80, by = 5))+scale_x_continuous(breaks = seq(1880, 2014, by = 10))+scale_fill_gradient(low="darkcyan", high="darkorange", name = "avg deg F")
+```
+
+### Interactive Graphs
+
+The use of *interactive graphs* may also be explored using *stream graphs*.  Part of the temperature data set includes temperature anomalies by geographic region as expressed by longitude and latitude coordinates or zones. The code to generate the interactive streamgraphs is called *streamgraph htmlwidgtet R Package* which can be installed as an R library from github (Reference https://hrbrmstr.github.io/streamgraph/).  The author of the streamgraph html widget is Bob Rudis. Documenation for streamgraph can be found at https://github.com/hrbrmstr/streamgraph.
+
+The following code chunk imports a modified Excel file in which the temperature anomalies by region are in "long format" with the region becoming a categorical variable.  
+
+```{r}
+library(readxl)
+region2 <- read_excel("~/Data2/Tony/2017/Data Visualization University of Illinois/Week 1/region2.xlsx")
+str(region2)
+```
+
+Unfortunately, when using Excel, date ranges can only go back to 1900.  Subsequently, a portion of the data was not used.  Certain characteristics of *streamgraph* require the time data to be in POSIXlt format; this conversion could be done in R but a quick data manipulation was done in Excel for timeliness and to focus on the principle of the graph (e.g. to see how it can be done).  Hence the graphs below goes back to 1900 only.
+
+#### **Stream Graph Interactive Visualization $g_0 = 0$ | Global Temperature Anomalies**
+
+Next, the graph is generated using the *streamgraph* function in which the offset is set at "0" or an ordinary bar chart (which will then have the same variance problems as a bar chart).  Also *sg_legend* is set to "TRUE" which then makes the graph interactive that enables the following of each "flow" through a filter making for a very compelling visual.  Notice that the graph is additive; just like a bar chart, each segment adds up based on the underlying values, hence the y-axis scale must be viewed with caution.  Here the y-axis scale is the cumulative deviations of the zonal regions data temperature data anomalies.  Generally speaking, temperature anomalies are increasing in magnitude e.g.larger temperature swings are beign seen at the "hotter" end of the spectrum.
+
+**Instructions: Scroll over the graph and the region plotted will be displayed in the upper left hand corner.  Alternatively, use the drop down legend below the graph to select a region.**
+
+```{r fig.height=5, fig.width=9}
+region2 %>%streamgraph("region", "temp", "year", offset="zero", interpolate="cardinal") %>%sg_axis_x(1, "year", "%Y") %>%sg_fill_brewer("Spectral") %>%     sg_legend(TRUE, "Zonal Region: ")
+```
+
+#### **Stream Graph Interactive Visualization $g_0 \neq 0$ | Global Temperature Anomalies**
+
+The following interactive graph is generated with the offset not equal to zero which centers the graph so that there are mirror images produced.  This graph then shows the variability in temperature fluctuations has become larger over the past few decades.
+
+Specifically, if viewed within the context of "stream"" parlance, there appears to be a "bottleneck" or region of low expanse in the 1940's to 1970's and then the blooming out of temperatures after that time period into a wide floodplain configuration.
+
+```{r fig.height=5, fig.width=9}
+region2 %>%streamgraph("region", "temp", "year", interpolate="cardinal") %>%sg_axis_x(1, "year", "%Y") %>%sg_fill_brewer("Spectral") %>%     sg_legend(TRUE, "Zonal Region: ")
+```
+
+### References
+
+"GISS Surface Temperature Analysis (GISTEMP)," *National Aeronautics and Space Administration Goddard Institute for Space Studies*, https://data.giss.nasa.gov/gistemp/
+
+Wickham, Hadley, *ggplot2: Elegant Graphics for Data Analysis,* 2nd edition, Springer, New York, 2016.
