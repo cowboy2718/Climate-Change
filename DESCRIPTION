@@ -1,0 +1,19 @@
+Package: ClimateChange
+Type: Package
+Title: Climate Change Graphical Display using R
+Version: 0.1.0
+Author: person("Tony", "Gojanovic", email = "tonygojanovic@millercoors.com",
+                  role = c("aut", "cre"))
+Maintainer: Tony Gojanovic <tony.gojanovic@somewhere.net>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+VignetteBuilder: utils
+RoxygenNote: 6.1.1
+Imports: ggplot2,
+  dplyr,
+  readxl
+Suggests: knitr,
+    rmarkdown
