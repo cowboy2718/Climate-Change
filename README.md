@@ -56,6 +56,13 @@ Next, the graph is generated using the *streamgraph* function in which the offse
 
 ***
 
+The following interactive graph is generated with the offset not equal to zero which centers the graph so that there are mirror images produced.  This graph then shows the variability in temperature fluctuations has become larger over the past few decades.
+
+Specifically, if viewed within the context of "stream"" parlance, there appears to be a "bottleneck" or region of low expanse in the 1940's to 1970's and then the blooming out of temperatures after that time period into a wide floodplain configuration.
+
+![ ](Stream_non_zero.png)
+***
+
 
 ### Package Name and Location
 
