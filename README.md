@@ -7,15 +7,26 @@
 
 ### Background
 
-The GISS Surface Temperature Analysis (GISTEMP) is an estimate of global surface temperature change. From the NASA GISTEMP website, the history of the data are "Global temperature records start around 1880 because observations did not sufficiently cover enough of the planet prior to that time. The period of 1951-1980 was chosen largely because the U.S. National Weather Service uses a three-decade period to define "normal" or average temperature. The GISS temperature analysis effort began around 1980, so the most recent 30 years was 1951-1980. It is also a period when many of today's adults grew up, so it is a common reference that many people can remember." (Reference https://earthobservatory.nasa.gov/Features/WorldOfChange/decadaltemp.php).
+The GISS Surface Temperature Analysis (GISTEMP) is an estimate of global surface temperature change. From the NASA GISTEMP website, the history of the data are "Global temperature records start around 1880 because observations did not sufficiently cover enough of the planet prior to that time. The period of 1951-1980 was chosen largely because the U.S. National Weather Service uses a three-decade period to define "normal" or average temperature. The GISS temperature analysis effort began around 1980, so the most recent 30 years was 1951-1980. It is also a period when many of today's adults grew up, so it is a common reference that many people can remember." 
+
+See https://earthobservatory.nasa.gov/Features/WorldOfChange/decadaltemp.php for more information.
 
 ***
 
 ### Package Details
 
-This package provides routines for the visualization of global surface temperature change.  Three type of graphs are presented: a **simple line chart**; a **bar plot**; a **streamgraph**.  All graphical displays are based off of the same GISTEMP data set.
+This package provides routines for the visualization of global surface temperature change.  Three type of graphs are presented: a **simple line chart**; a **bar plot**; a **streamgraph**.  All graphical displays are based off of the same GISTEMP data set.  Examples are shown below.
 
-This package provides routines to perform the analysis using the differing graph types.  Examples are shown below.
+***
+
+### Data sets
+
+Data sets for routines in this package can be found in in **Inst > Data > Extdata** section in the pacakge files.  The following are the files that can be used for exploring climate change:
+
+1. ExcelFormattedGISTEMPData2CSV.csv (for line and bar plots)   
+2. regions2.xlsx (for streamgraphs)**
+
+Current data sets for climate modeling may be found at https://data.giss.nasa.gov/gistemp/  
 
 ***
 
@@ -59,6 +70,8 @@ The following indicates the status of the most recent build with Travis:
 
 ### References
 
+GISTEMP Team, 2018: GISS Surface Temperature Analysis (GISTEMP). NASA Goddard Institute for Space Studies. Dataset accessed 20YY-MM-DD at https://data.giss.nasa.gov/gistemp/.
 
+Hansen, J., R. Ruedy, M. Sato, and K. Lo, 2010: Global surface temperature change, Rev. Geophys., 48, RG4004, doi:10.1029/2010RG000345.
 
 
