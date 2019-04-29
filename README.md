@@ -46,7 +46,7 @@ The following is a bar chart interpretation of the global temperature anomaly da
 
 ***
 
-### Streamgraph
+### Streamgraphs
 
 Next, the graph is generated using the *streamgraph* function in which the offset is set at "0" or an ordinary bar chart (which will then have the same variance problems as a bar chart).  Also *sg_legend* is set to "TRUE" which then makes the graph interactive that enables the following of each "flow" through a filter making for a very compelling visual.  Notice that the graph is additive; just like a bar chart, each segment adds up based on the underlying values, hence the y-axis scale must be viewed with caution.  Here the y-axis scale is the cumulative deviations of the zonal regions data temperature data anomalies.  Generally speaking, temperature anomalies are increasing in magnitude e.g.larger temperature swings are beign seen at the "hotter" end of the spectrum.
 
